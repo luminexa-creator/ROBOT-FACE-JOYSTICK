@@ -1,0 +1,133 @@
+# 🤖 Robot Face with Joystick Control
+
+Robot uso wa OLED unaodhibitiwa kwa joystick, ukiwa na servo motors mbili na uwezo wa kujiongoza yenyewe (Auto Mode).
+
+![Arduino](https://img.shields.io/badge/Arduino-Uno-00979D?style=for-the-badge&logo=arduino&logoColor=white)
+![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
+---
+
+## 📖 Maelezo ya Project
+
+**Robot Face with Joystick Control** ni mradi wa Arduino unaounganisha OLED display, joystick, na servo motors mbili ili kutengeneza uso wa roboti unaodhibitiwa kwa mkono au kujiongoza yenyewe.
+
+Mradi huu unafaa kwa wanafunzi, wapenda robotics, na mtu yeyote anayetaka kujifunza Arduino, OLED, na servo control.
+
+Uso wa roboti unatumia animation ya frames 12 inayobadilika kila 83ms, ikitoa hisia ya macho yanayofumba na kufumbua.
+
+---
+
+## ✨ Features
+
+- 🎮 **Manual Mode** — dhibiti uso na servo kwa joystick
+- 🤖 **Auto Mode** — robot inajiongoza yenyewe kwa random
+- 🖥️ **OLED Animation** — uso wa roboti wenye frames 12
+- ⚙️ **Smooth Movement** — servo zinasogea laini bila mtetemo
+- 🎯 **Auto Calibration** — joystick inajipanga yenyewe wakati wa kuanza
+- 🔘 **Button Control** — kitufe cha joystick kinabadilisha mode
+
+---
+
+## 🛠️ Vifaa Vinavyohitajika
+
+| Kifaa | Idadi | Maelezo |
+|-------|-------|---------|
+| Arduino Uno | 1 | Au board yoyote ya Arduino |
+| OLED Display 0.96" | 1 | SSD1306, 128×64, I2C |
+| Joystick Module | 1 | Analog joystick na kitufe (SW) |
+| Servo Motor | 2 | SG90, MG90S, au nyingine yoyote |
+| Power Supply ya nje | 1 | 5V-6V kwa servo (beti 4xAA au adapter) |
+| Waya za jumper | - | Male-to-male na male-to-female |
+| Breadboard | 1 | Kwa kuunganisha |
+
+---
+
+## 🔌 Wiring / Muunganisho
+
+### Jedwali la Muunganisho
+
+| Kifaa | Pin ya Kifaa | Pin ya Arduino Uno |
+|-------|-------------|-------------------|
+| **OLED SSD1306** | VCC | 5V |
+| | GND | GND |
+| | SDA | A4 |
+| | SCL | A5 |
+| **Joystick Module** | VCC | 5V |
+| | GND | GND |
+| | VRx (X) | A0 |
+| | VRy (Y) | A1 |
+| | SW (kitufe) | D2 |
+| **Servo 1 (X-axis)** | Signal | D9 |
+| | VCC | 5V ya nje |
+| | GND | GND ya nje |
+| **Servo 2 (Y-axis)** | Signal | D10 |
+| | VCC | 5V ya nje |
+| | GND | GND ya nje |
+
+### ⚠️ Onyo Muhimu
+
+**Servo motors zinatumia nguvu nyingi!** Usizungushe servo mbili moja kwa moja kwenye 5V ya Arduino — inaweza kuharibu board.
+
+**Tumia power supply ya nje kwa servo** na unganisha GND ya power supply na GND ya Arduino pamoja (common ground).
+
+---
+
+## 📚 Libraries Zinazohitajika
+
+Sakinisha libraries hizi kwenye Arduino IDE:
+
+- **Adafruit SSD1306** — kwa OLED display
+- **Adafruit GFX Library** — graphics library
+- **Servo** — inakuja na Arduino IDE (built-in)
+- **Wire** — inakuja na Arduino IDE (built-in)
+
+**Jinsi ya Kusakinisha:**
+1. Fungua Arduino IDE
+2. Nenda **Sketch → Include Library → Manage Libraries**
+3. Tafuta `Adafruit SSD1306` na bonyeza **Install**
+4. Tafuta `Adafruit GFX` na bonyeza **Install**
+
+---
+
+## 🚀 Jinsi ya Kutumia
+
+### Hatua ya 1: Unganisha Hardware
+Fuata **Wiring** hapo juu. Hakikisha:
+- OLED, Joystick, na Arduino zinaunganishwa kwenye 5V na GND
+- Servo zinaunganishwa kwenye power supply ya nje
+- GND ya power supply ya nje imeunganishwa na GND ya Arduino
+
+### Hatua ya 2: Upload Code
+1. Fungua Arduino IDE
+2. Nakili code yote kutoka `code/robot_face.ino`
+3. Chagua board: **Tools → Board → Arduino Uno**
+4. Chagua port: **Tools → Port → COM X**
+5. Bonyeza **Upload**
+
+### Hatua ya 3: Endesha
+- Uso wa roboti utaonekana kwenye OLED
+- Sogeza joystick kudhibiti uso na servo
+- Bonyeza kitufe cha joystick kuwasha Auto Mode
+- Bonyeza tena kurudi Manual Mode
+
+---
+
+## 🎮 Controls
+
+| Kitendo | Matokeo |
+|---------|---------|
+| Sogeza joystick **kushoto** | Uso unasogea kushoto, servo inasogea |
+| Sogeza joystick **kulia** | Uso unasogea kulia, servo inasogea |
+| Sogeza joystick **juu** | Uso unasogea juu, servo inasogea |
+| Sogeza joystick **chini** | Uso unasogea chini, servo inasogea |
+| **Bonyeza kitufe cha joystick** | Badilisha Manual/Auto Mode |
+| Acha joystick katikati | Uso na servo zinabaki katikati |
+
+---
+
+## ⚙️ Kubadilisha Settings
+
+### 1. Deadzone (kuzuia mtetemo)
+```cpp
+const int DEADZONE = 30;
